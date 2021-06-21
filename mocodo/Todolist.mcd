@@ -1,9 +1,0 @@
-CAN EDIT TASK, 11 TASK
-TASK : nom de la tâche, pourcentage de réalisation
-belongs to, 01 TASK, 0N CATEGORY
-
-STATUS, 01 TASK
-COMPLETION, 01 TASK
-CATEGORY : nom de la catégorie
-
-CAN EDIT NAME, 11 CATEGORY
