@@ -2,70 +2,75 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class TaskController extends Controller
 {
     //GET List
     public function list()
     {
         // On récupère nos catégories en base grace au model
-        $categoriesList = Category::all();
+        $tasksList = Task::all();
 
         // On renvoi tout ça en JSON ... et c'est tout !
-        return response()->json($categoriesList, 200);
+        return response()->json($tasksList, 200);
     }
 
     //POST
     public function add(Request $request)
     {
-        $category = new Category();
+        $task = new Task();
         // On rempli les propriétés de notre
         // nouvelle catégorie avec les infos envoyées en $_POST
         // On vérifie qu'on a pas reçu n'importe quoi au passage
-        $category->name = $request->name;
-        $category->status = $request->status;
+        $task->title = $request->title;
+        $task->category_id = $request->categoryId;
+        $task->completion = $request->completion;
+        $task->status = $request->status;
 
-        $category->save();
+        $task->save();
 
-        if (($category->save()) == true) {
+        if (($task->save())==true) {
             // On renvoi tout ça en JSON ... et c'est tout !
-            return response()->json($category, 201);
-        } else return response()->json($category, 500);
+            return response()->json($task, 201);}
+
+        else return response()->json($task, 500);
     }
 
-    //GET Find
+    //GET find
     public function find($id)
     {
         // On récupère nos catégories en base grace au model
-        $category = Category::find($id);
+        $task = Task::find($id);
 
         // On renvoi tout ça en JSON ... et c'est tout !
-        return response()->json($category, 200);
+        return response()->json($task, 200);
     }
 
     //PUT (update all data)
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
+        $task = Task::find($id);
 
-        $category->name = $request->name;
-        $category->status = $request->status;
+        $task->title = $request->title;
+        $task->completion = $request->completion;
+        $task->status = $request->status;
 
-        $category->save([$id]);
+        $task->save([$id]);
     }
 
     //!PATCH (update partial data) pas encore fait
     /*
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
+        $task = Task::find($id);
 
-        $category->name = $request->name;
-        $category->status = $request->status;
+        $task->title = $request->title;
+        $task->completion = $request->completion;
+        $task->status = $request->status;
 
-        $category->save([$id]);
+        $task->save([$id]);
     }
     */
 
@@ -74,11 +79,11 @@ class CategoryController extends Controller
     public function delete($id)
     {
         // Méthode "S6"
-        //$category = Category::find( $id );
-        //$category->delete();
+        //$task = Task::find($id);
+        //$task->delete();
 
         // Méthode DESTROY
-        Category::destroy($id);
+        Task::destroy($id);
         return response()->json(null, 204);
     }
 }

@@ -19,14 +19,111 @@ $router->get(
     ]
 );
 
+/*
+|-------------------------|
+|  ROUTES des catégories  |
+|-------------------------|
+*/
+
 $router->get(
-    '/categories',
+    "/categories",
     [
         'uses' => 'CategoryController@list',
         'as'   => 'category-list'
     ]
 );
 
+$router->post(
+    "/categories",
+    [
+        'uses' => 'CategoryController@add',
+        'as'   => 'category-add'
+    ]
+);
+
+$router->get(
+    "/categories/{id}",
+    [
+        'uses' => 'CategoryController@find',
+        'as'   => 'category-find'
+    ]
+);
+
+$router->put(
+    "/categories/{id}",
+    [
+        'uses' => 'CategoryController@update',
+        'as'   => 'category-update'
+    ]
+);
+
+$router->patch(
+    "/categories/{id}",
+    [
+        'uses' => 'CategoryController@update',
+        'as'   => 'category-update'
+    ]
+);
+
+$router->delete(
+    "/categories/{id}",
+    [
+        'uses' => 'CategoryController@delete',
+        'as'   => 'category-delete'
+    ]
+);
 
 
+/*
+|---------------------|
+|  ROUTES des taches  |
+|---------------------|
+*/
 
+$router->get(
+    "/tasks",
+    [
+        'uses' => 'TaskController@list',
+        'as'   => 'task-list'
+    ]
+);
+
+$router->post(
+    "/tasks",
+    [
+        'uses' => 'TaskController@add',
+        'as'   => 'task-add'
+    ]
+);
+
+$router->get(
+    "/tasks/{id}",
+    [
+        'uses' => 'TaskController@find',
+        'as'   => 'task-find'
+    ]
+);
+
+$router->put(
+    "/tasks/{id}",
+    [
+        'uses' => 'TaskController@update',
+        'as'   => 'task-update'
+    ]
+);
+
+$router->patch(
+    "/categories/{id}",
+    [
+        'uses' => 'CategoryController@update',
+        'as'   => 'category-update'
+    ]
+);
+
+$router->delete(
+    "/tasks/{id}",
+    [
+        'uses' => 'TaskController@delete',
+        'as'   => 'task-delete'
+    ]
+);
