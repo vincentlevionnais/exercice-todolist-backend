@@ -52,16 +52,16 @@ $router->get(
 $router->put(
     "/categories/{id}",
     [
-        'uses' => 'CategoryController@update',
-        'as'   => 'category-update'
+        'uses' => 'CategoryController@edit',
+        'as'   => 'category-edit-put'
     ]
 );
 
 $router->patch(
     "/categories/{id}",
     [
-        'uses' => 'CategoryController@update',
-        'as'   => 'category-update'
+        'uses' => 'CategoryController@edit',
+        'as'   => 'category-edit-patch'
     ]
 );
 
@@ -107,16 +107,16 @@ $router->get(
 $router->put(
     "/tasks/{id}",
     [
-        'uses' => 'TaskController@update',
-        'as'   => 'task-update'
+        'uses' => 'TaskController@edit',
+        'as'   => 'task-edit-put'
     ]
 );
 
 $router->patch(
-    "/categories/{id}",
+    "/tasks/{id}",
     [
-        'uses' => 'CategoryController@update',
-        'as'   => 'category-update'
+        'uses' => 'TaskController@edit',
+        'as'   => 'task-edit-patch'
     ]
 );
 
