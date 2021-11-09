@@ -6,6 +6,6 @@ class MainController extends Controller
 {
   public function home()
   {
-    echo "ECHO COUCOU";
+    echo "Welcome home!";
   }
 }

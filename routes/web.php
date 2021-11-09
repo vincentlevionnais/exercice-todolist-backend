@@ -20,61 +20,6 @@ $router->get(
 );
 
 /*
-|-------------------------|
-|  ROUTES des catégories  |
-|-------------------------|
-*/
-
-$router->get(
-    "/categories",
-    [
-        'uses' => 'CategoryController@list',
-        'as'   => 'category-list'
-    ]
-);
-
-$router->post(
-    "/categories",
-    [
-        'uses' => 'CategoryController@add',
-        'as'   => 'category-add'
-    ]
-);
-
-$router->get(
-    "/categories/{id}",
-    [
-        'uses' => 'CategoryController@find',
-        'as'   => 'category-find'
-    ]
-);
-
-$router->put(
-    "/categories/{id}",
-    [
-        'uses' => 'CategoryController@edit',
-        'as'   => 'category-edit-put'
-    ]
-);
-
-$router->patch(
-    "/categories/{id}",
-    [
-        'uses' => 'CategoryController@edit',
-        'as'   => 'category-edit-patch'
-    ]
-);
-
-$router->delete(
-    "/categories/{id}",
-    [
-        'uses' => 'CategoryController@delete',
-        'as'   => 'category-delete'
-    ]
-);
-
-
-/*
 |---------------------|
 |  ROUTES des taches  |
 |---------------------|

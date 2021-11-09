@@ -13,7 +13,7 @@ class TaskController extends Controller
     //GET List
     public function list()
     {
-        return response()->json(Task::all()->load('category'), 200);
+        return response()->json(Task::all(), 200);
     }
 
     //POST
@@ -24,15 +24,11 @@ class TaskController extends Controller
         //Validation
         $this->validate($request, [
             "title"      => "required|min:5|max:128|unique:tasks",
-            "completion" => "numeric|min:0|max:100",
-            "status"     => "numeric|min:1|max:2",
-            "categoryId" => "required|numeric|exists:categories,id"
+            "completion" => "numeric|min:1|max:100"
         ]);
 
         $task->title       = $request->input("title");
-        $task->completion  = $request->input("completion", 0);
-        $task->status      = $request->input("status", 1);
-        $task->category_id = $request->input("categoryId");
+        $task->completion  = $request->input("completion", 1);
 
         // la méthode save d'un model Eloquent renvoi un booléen
         // selon si la sauvegarde a fonctionné ou non
@@ -49,10 +45,10 @@ class TaskController extends Controller
     //GET find
     public function find($id)
     {
-        // On récupère nos catégories en base grace au model
+        // On récupère notre tâche en base grâce au model
         $task = Task::find($id);
 
-        // On renvoi tout ça en JSON ... et c'est tout !
+        // On renvoi tout ça en JSON
         return response()->json($task, 200);
     }
 
@@ -68,12 +64,10 @@ class TaskController extends Controller
             if ($request->isMethod("put")) {
                 // On vérifie que tous les champs sont présents ET remplis
                 // Bonus : On pourrait aller plus loin en utilisant validate ;)
-                if ($request->filled(["title", "categoryId", "completion", "status"])) {
+                if ($request->filled(["title", "completion"])) {
                     // Mise à jour de l'objet Task
                     $taskToUpdate->title       = $request->input("title");
-                    $taskToUpdate->category_id = $request->input("categoryId");
                     $taskToUpdate->completion  = $request->input("completion");
-                    $taskToUpdate->status      = $request->input("status");
                 } else {
                     // Si manque des informations => mauvaise requête
                     return response("", Response::HTTP_BAD_REQUEST);
@@ -89,16 +83,8 @@ class TaskController extends Controller
                     $taskToUpdate->title = $request->input('title');
                     $oneDataAtLeast = true;
                 }
-                if ($request->filled('categoryId')) {
-                    $taskToUpdate->category_id = $request->input('categoryId');
-                    $oneDataAtLeast = true;
-                }
                 if ($request->filled('completion')) {
                     $taskToUpdate->completion = $request->input('completion');
-                    $oneDataAtLeast = true;
-                }
-                if ($request->filled('status')) {
-                    $taskToUpdate->status = $request->input('status');
                     $oneDataAtLeast = true;
                 }
 
